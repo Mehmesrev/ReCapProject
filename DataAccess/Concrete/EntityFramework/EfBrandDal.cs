@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Brand brand)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 var addedEntity = context.Entry(brand);
                 addedEntity.State = EntityState.Added;
@@ -24,7 +24,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Delete(Brand brand)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 var deletedEntity = context.Entry(brand);
                 deletedEntity.State = EntityState.Deleted;
@@ -34,7 +34,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Update(Brand brand)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 var updatedEntity = context.Entry(brand);
                 updatedEntity.State = EntityState.Modified;
@@ -44,7 +44,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Brand Get(Expression<Func<Brand, bool>> filter)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 return context.Set<Brand>().SingleOrDefault(filter);
             }
@@ -52,7 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 return filter == null
                     ? context.Set<Brand>().ToList()

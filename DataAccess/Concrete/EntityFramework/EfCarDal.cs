@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Car car)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 var addedEntity = context.Entry(car);
                 addedEntity.State = EntityState.Added;
@@ -24,7 +24,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Delete(Car car)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 var deletedEntity = context.Entry(car);
                 deletedEntity.State = EntityState.Deleted;
@@ -34,7 +34,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Update(Car car)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 var updatedEntity = context.Entry(car);
                 updatedEntity.State = EntityState.Modified;
@@ -44,7 +44,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Car Get(Expression<Func<Car, bool>> filter)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 return context.Set<Car>().SingleOrDefault(filter);
             }
@@ -52,7 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 return filter == null
                     ? context.Set<Car>().ToList()

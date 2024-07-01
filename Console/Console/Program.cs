@@ -15,17 +15,9 @@ namespace ConsoleUI
             ICarDal carDal = new EfCarDal();
             CarManager carManager = new CarManager(carDal);
 
-            // Yeni bir araç ekleme
             try
             {
-                Car newCar = new Car
-                {
-                    BrandId = 1, // Mevcut bir brandId kullanmalısınız
-                    ColorId = 1, // Mevcut bir colorId kullanmalısınız
-                    DailyPrice = 150,
-                    Description = "BMW"
-                };
-
+                Car newCar = new Car {BrandId = 1, ColorId = 1, DailyPrice = 150, Description = "BMW"};
                 carManager.Add(newCar);
                 Console.WriteLine("Car added successfully.");
             }
@@ -38,7 +30,6 @@ namespace ConsoleUI
                 }
             }
 
-            // Tüm araçları listeleme
             try
             {
                 foreach (var car in carManager.GetAll())

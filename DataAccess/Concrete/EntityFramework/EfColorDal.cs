@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Color color)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 var addedEntity = context.Entry(color);
                 addedEntity.State = EntityState.Added;
@@ -24,7 +24,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Delete(Color color)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 var deletedEntity = context.Entry(color);
                 deletedEntity.State = EntityState.Deleted;
@@ -34,7 +34,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Update(Color color)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 var updatedEntity = context.Entry(color);
                 updatedEntity.State = EntityState.Modified;
@@ -44,7 +44,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Color Get(Expression<Func<Color, bool>> filter)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 return context.Set<Color>().SingleOrDefault(filter);
             }
@@ -52,7 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (VsCarProjectContext context = new VsCarProjectContext())
             {
                 return filter == null
                     ? context.Set<Color>().ToList()
