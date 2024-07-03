@@ -7,8 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using DataAccess.Abstract;
-using Entities.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -21,64 +22,24 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Add(Car car)
+        public void Add()
         {
-            //car.Description: araba ismi yerine kullanıldı 
-            if (car.Description.Length < 2)
-            {
-                throw new Exception("Car name must be at least 2 characters long.");
-            }
-
-            if (car.DailyPrice <= 0)
-            {
-                throw new Exception("Daily price must be greater than 0.");
-            }
-
-            _carDal.Add(car);
-        }
-
-        public void Update(Car car)
-        {
-            var carToUpdate = _carDal.Get(c => c.Id == car.Id);
-
-            if (carToUpdate != null)
-            {
-                carToUpdate.BrandId = car.BrandId;
-                carToUpdate.ColorId = car.ColorId;
-                carToUpdate.DailyPrice = car.DailyPrice;
-                carToUpdate.Description = car.Description;
-                _carDal.Update(carToUpdate);
-            }
-            else
-            {
-                throw new Exception("Car not found.");
-            }
+            _carDal.Add();
         }
 
         public void Delete(Car car)
         {
-            var carToDelete = _carDal.Get(c => c.Id == car.Id);
-            if (carToDelete != null)
-            {
-                _carDal.Delete(carToDelete);
-            }
-            else
-            {
-                throw new Exception("Car not found.");
-            }
+            _carDal.Delete(car);
         }
 
-        public Car Get(Car car)
+        public void Update(Car car)
         {
-            var carFromDb = _carDal.Get(c => c.Id == car.Id);
-            if (carFromDb != null)
-            {
-                return carFromDb;
-            }
-            else
-            {
-                throw new Exception("Car not found.");
-            }
+            _carDal.Update(car);
+        }
+
+        public Car Get(int id)
+        {
+            return _carDal.Get(c => c.Id == id);
         }
 
         public List<Car> GetAll()
@@ -86,14 +47,14 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        public List<Car> GetCarsByBrandId(int colorId)
+        public List<Car> GetCarsByBrandId(int id)
         {
-            return _carDal.GetAll(c => c.BrandId == colorId);
+            return _carDal.GetAll(c => c.BrandId == id);
         }
 
-        public List<Car> GetCarsByColorId(int brandId)
+        public List<Car> GetCarsByColorId(int id)
         {
-            return _carDal.GetAll(c => c.BrandId == brandId);
+            return _carDal.GetAll(c => c.ColorId == id);
         }
     }
 }
