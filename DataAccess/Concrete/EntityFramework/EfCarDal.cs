@@ -20,6 +20,8 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from c in context.Car
                              join b in context.Brand
                              on c.Id equals b.Id
+                             where c.DailyPrice > 0
+                             where b.Name.Length > 2
                              select new CarDetailDto
                              {
                                  Id = c.Id,

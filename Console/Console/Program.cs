@@ -3,7 +3,6 @@ using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
-using Entities.Abstract;
 using Entities.Concrete;
 
 namespace ConsoleUI
@@ -12,6 +11,8 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            CarManager carManager = new CarManager(new EfCarDal());
+            carManager.Add();
             
         }
     

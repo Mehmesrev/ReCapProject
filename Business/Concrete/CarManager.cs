@@ -22,9 +22,9 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Add()
+        public void Add(Car car)
         {
-            _carDal.Add();
+            _carDal.Add(car);
         }
 
         public void Delete(Car car)
