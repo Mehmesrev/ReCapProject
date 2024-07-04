@@ -21,8 +21,14 @@ namespace Business.Concrete
 
         public void Add(Brand brand)
         {
-            var brandNameCondition = brand.Name > 2;
-            _brandDal.Add(brand);
+            if (brand.Name.Length > 2)
+            {
+                _brandDal.Add(brand);
+            }
+            else
+            {
+                throw new Exception("Brand name must be longer than 2 characters.");
+            }
         }
 
         public void Delete(Brand brand)

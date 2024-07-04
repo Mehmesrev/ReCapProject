@@ -24,8 +24,14 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            var dailyPriceCondition = car.DailyPrice > 0;
-            _carDal.Add(dailyPriceCondition);
+            if (car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                throw new Exception("Daily price must be greater than zero.");
+            }
         }
 
         public void Delete(Car car)
