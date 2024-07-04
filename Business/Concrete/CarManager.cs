@@ -63,5 +63,10 @@ namespace Business.Concrete
         {
             return _carDal.GetAll(c => c.ColorId == id);
         }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
+        }
     }
 }

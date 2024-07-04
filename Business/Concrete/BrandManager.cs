@@ -21,7 +21,7 @@ namespace Business.Concrete
 
         public void Add(Brand brand)
         {
-            if (brand.Name.Length > 2)
+            if (brand.BrandName.Length > 2)
             {
                 _brandDal.Add(brand);
             }

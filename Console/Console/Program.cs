@@ -13,6 +13,8 @@ namespace ConsoleUI
         {
 
 
+            //GetAllCarDetailsTest();
+
             //DeleteCarTest();
             //DeleteBrandTest();
             //DeleteColorTest();
@@ -34,12 +36,21 @@ namespace ConsoleUI
             //GetAllColorTest();
         }
 
+        private static void GetAllCarDetailsTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            foreach (var gct in carManager.GetCarDetails())
+            {
+                Console.WriteLine(gct.Id + " " + gct.CarName + " " + gct.BrandName + " " + gct.ColorName + " " + gct.DailyPrice);
+            }
+        }
+
         private static void GetAllColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
             foreach (var gaColor in colorManager.GetAll())
             {
-                Console.WriteLine(gaColor.Name);
+                Console.WriteLine(gaColor.ColorName);
             }
         }
 
@@ -48,7 +59,7 @@ namespace ConsoleUI
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             foreach (var gaBrand in brandManager.GetAll())
             {
-                Console.WriteLine(gaBrand.Name);
+                Console.WriteLine(gaBrand.BrandName);
             }
         }
 
@@ -57,7 +68,7 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             foreach (var gaCar in carManager.GetAll())
             {
-                Console.WriteLine(gaCar.Description);
+                Console.WriteLine(gaCar.CarName);
             }
         }
 
@@ -67,7 +78,7 @@ namespace ConsoleUI
             ColorManager colorManager = new ColorManager(new EfColorDal());
             Color getColor = new Color();
             getColor = colorManager.Get(1);
-            Console.WriteLine(getColor.Name);
+            Console.WriteLine(getColor.ColorName);
         }
 
         private static void GetBrandTest()
@@ -75,7 +86,7 @@ namespace ConsoleUI
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             Brand getBrand = new Brand();
             getBrand = brandManager.Get(5);
-            Console.WriteLine(getBrand.Name);
+            Console.WriteLine(getBrand.BrandName);
         }
 
         private static void GetCarTest()
@@ -90,14 +101,14 @@ namespace ConsoleUI
         private static void UpgradeColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            Color upgColor = new Color() { Id = 1, Name = "Silver" };
+            Color upgColor = new Color() { Id = 1, ColorName = "Silver" };
             colorManager.Update(upgColor);
         }
 
         private static void UpdateBrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            Brand updBrand = new Brand() { Id = 4, Name = "Mercesrev" };
+            Brand updBrand = new Brand() { Id = 4, BrandName = "Mercesrev" };
             brandManager.Update(updBrand);
         }
 
@@ -106,12 +117,13 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             Car upgCar = new Car()
             {
-                Id = 9, //update, Id'ye bağlı şekilde metodu uygular. 
+                Id = 10, //update, Id'ye bağlı şekilde metodu uygular. 
                 BrandId = 4,
                 ColorId = 1,
-                ModelYear = 2023,
-                DailyPrice = 100,
-                Description = "4x4 kaplan arazi aracı"
+                ModelYear = 2024,
+                DailyPrice = 250,
+                Description = "Wir produzieren Technologie, andere wenden sie an",
+                CarName = "Obito"
             };
             carManager.Update(upgCar);
         }
@@ -120,14 +132,14 @@ namespace ConsoleUI
         private static void AddColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            Color addColor = new Color() { Name = "Gray" };
+            Color addColor = new Color() { ColorName = "Gray" };
             colorManager.Add(addColor);
         }
 
         private static void AddBrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            Brand addBrand = new Brand() { Name = "Mesrewagen" };
+            Brand addBrand = new Brand() { BrandName = "Mesrewagen" };
             brandManager.Add(addBrand);
         }
 
@@ -140,7 +152,8 @@ namespace ConsoleUI
                 ColorId = 2,
                 ModelYear = 2005,
                 DailyPrice = 200,
-                Description = "Wir produzieren Technologie, andere wenden sie an"
+                Description = "Wir produzieren Technologie, andere wenden sie an",
+                CarName = "Mersewagen"
             };
             carManager.Add(addCar);
         }
