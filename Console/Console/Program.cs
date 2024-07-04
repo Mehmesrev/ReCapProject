@@ -13,15 +13,42 @@ namespace ConsoleUI
         {
             //DeleteCarTest();
             //DeleteBrandTest();
-            //AddBrandTest();
+            //DeleteColorTest();
             //AddCarTest();
+            //AddBrandTest();
+            //AddColorTest();
+            CarManager carManager = new CarManager(new EfCarDal());
+            Car upgCar = new Car() 
+            {
+                BrandId = 4,
+                ColorId = 1,
+                ModelYear = 2023,
+                DailyPrice = 100,
+                Description = "4x4 kaplan arazi aracı"
+            };
+            carManager.Update(upgCar);
 
+        }
+
+        //add methods
+        private static void AddColorTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            Color addColor = new Color() { Name = "Gray" };
+            colorManager.Add(addColor);
+        }
+
+        private static void AddBrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            Brand addBrand = new Brand() { Name = "Mesrewagen" };
+            brandManager.Add(addBrand);
         }
 
         private static void AddCarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Car newCar = new Car()
+            Car addCar = new Car()
             {
                 BrandId = 4,
                 ColorId = 1,
@@ -29,37 +56,29 @@ namespace ConsoleUI
                 DailyPrice = 1000,
                 Description = "Wir produzieren Technologie, andere wenden sie an"
             };
-            carManager.Add(newCar);
+            carManager.Add(addCar);
         }
 
-        private static void AddBrandTest()
+        //delete methods
+        private static void DeleteColorTest()
         {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            Brand newBrand = new Brand()
-            {
-                Name = "Mesrewagen"
-            };
-            brandManager.Add(newBrand);
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            Color delColor = new Color() { Id = 2 };
+            colorManager.Delete(delColor);
         }
 
         private static void DeleteBrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            Brand oldBrand = new Brand()
-            {
-                Id = 1
-            };
-            brandManager.Delete(oldBrand);
+            Brand delBrand = new Brand() { Id = 1 };
+            brandManager.Delete(delBrand);
         }
 
         static void DeleteCarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Car oldCar = new Car
-            {
-                Id = 7
-            };
-            carManager.Delete(oldCar);
+            Car delCar = new Car { Id = 7 };
+            carManager.Delete(delCar);
         }
     }
 }
