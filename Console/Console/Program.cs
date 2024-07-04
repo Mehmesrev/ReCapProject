@@ -11,15 +11,102 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+
+
             //DeleteCarTest();
             //DeleteBrandTest();
             //DeleteColorTest();
+
             //AddCarTest();
             //AddBrandTest();
             //AddColorTest();
-            CarManager carManager = new CarManager(new EfCarDal());
-            Car upgCar = new Car() 
+
+            //UpdateCarTest();
+            //UpdateBrandTest();
+            //UpgradeColorTest();
+
+            //GetCarTest();
+            //GetBrandTest();
+            //GetColorTest();
+
+            //GetAllCarTest();
+            //GetAllBrandTest();
+            //GetAllColorTest();
+        }
+
+        private static void GetAllColorTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            foreach (var gaColor in colorManager.GetAll())
             {
+                Console.WriteLine(gaColor.Name);
+            }
+        }
+
+        private static void GetAllBrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            foreach (var gaBrand in brandManager.GetAll())
+            {
+                Console.WriteLine(gaBrand.Name);
+            }
+        }
+
+        private static void GetAllCarTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            foreach (var gaCar in carManager.GetAll())
+            {
+                Console.WriteLine(gaCar.Description);
+            }
+        }
+
+        //Get Mothods 
+        private static void GetColorTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            Color getColor = new Color();
+            getColor = colorManager.Get(1);
+            Console.WriteLine(getColor.Name);
+        }
+
+        private static void GetBrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            Brand getBrand = new Brand();
+            getBrand = brandManager.Get(5);
+            Console.WriteLine(getBrand.Name);
+        }
+
+        private static void GetCarTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            Car getCar = new Car();
+            getCar = carManager.Get(10);
+            Console.WriteLine(getCar.ModelYear + " " + getCar.DailyPrice + " " + getCar.Description);
+        }
+
+        //upgrade methods
+        private static void UpgradeColorTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            Color upgColor = new Color() { Id = 1, Name = "Silver" };
+            colorManager.Update(upgColor);
+        }
+
+        private static void UpdateBrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            Brand updBrand = new Brand() { Id = 4, Name = "Mercesrev" };
+            brandManager.Update(updBrand);
+        }
+
+        private static void UpdateCarTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            Car upgCar = new Car()
+            {
+                Id = 9, //update, Id'ye bağlı şekilde metodu uygular. 
                 BrandId = 4,
                 ColorId = 1,
                 ModelYear = 2023,
@@ -27,7 +114,6 @@ namespace ConsoleUI
                 Description = "4x4 kaplan arazi aracı"
             };
             carManager.Update(upgCar);
-
         }
 
         //add methods
@@ -50,10 +136,10 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             Car addCar = new Car()
             {
-                BrandId = 4,
-                ColorId = 1,
-                ModelYear = 2024,
-                DailyPrice = 1000,
+                BrandId = 5,
+                ColorId = 2,
+                ModelYear = 2005,
+                DailyPrice = 200,
                 Description = "Wir produzieren Technologie, andere wenden sie an"
             };
             carManager.Add(addCar);
@@ -77,7 +163,10 @@ namespace ConsoleUI
         static void DeleteCarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Car delCar = new Car { Id = 7 };
+            Car delCar = new Car
+            {
+                Id = 7 //delete, Id'ye bağlı şekilde metodu uygular. 
+            };
             carManager.Delete(delCar);
         }
     }
