@@ -21,6 +21,7 @@ namespace Business.Concrete
 
         public void Add(Brand brand)
         {
+            var brandNameCondition = brand.Name > 2;
             _brandDal.Add(brand);
         }
 

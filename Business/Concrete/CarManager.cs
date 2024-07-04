@@ -24,7 +24,8 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            _carDal.Add(car);
+            var dailyPriceCondition = car.DailyPrice > 0;
+            _carDal.Add(dailyPriceCondition);
         }
 
         public void Delete(Car car)

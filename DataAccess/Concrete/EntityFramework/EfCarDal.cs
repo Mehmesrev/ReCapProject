@@ -13,23 +13,5 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, VsCarProjectContext>, ICarDal
     {
-        public List<CarDetailDto> Add()
-        {
-            using (VsCarProjectContext context = new VsCarProjectContext())
-            {
-                var result = from c in context.Car
-                             join b in context.Brand
-                             on c.Id equals b.Id
-                             where c.DailyPrice > 0
-                             where b.Name.Length > 2
-                             select new CarDetailDto
-                             {
-                                 Id = c.Id,
-                                 Name = b.Name,
-                                 DailyPrice = c.DailyPrice
-                             };
-                return result.ToList();
-            }
-        }
     }
 }
