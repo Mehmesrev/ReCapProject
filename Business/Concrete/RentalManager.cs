@@ -25,7 +25,7 @@ namespace Business.Concrete
         public IResult Add(Rental rental)
         {
             
-            var isCarAvalible = _rentalDal.GetAll(r => r.CarId == rental.CarId).FirstOrDefault(r => r.ReturnDate == null);
+            var isCarAvalible = _rentalDal.GetAll(r => r.CarId  == rental.CarId).FirstOrDefault(r => r.ReturnDate == null);
             if (isCarAvalible != null)
             {
                 return new ErrorResult(Messages.CantBeRental);

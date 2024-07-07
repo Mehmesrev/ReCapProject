@@ -52,11 +52,12 @@ namespace ConsoleUI
             if (result.Success == true)
             {
                 Rental addRental = new Rental() { CustomerId = 1 , CarId = 9, RentDate = DateTime.Now, ReturnDate = DateTime.Now.AddDays(15) }; 
-                rentalManager.Delete(addRental);
+                rentalManager.Add(addRental);
 
                 foreach (var getAllRented in rentalManager.GetAll().Data)
                 {
-                    Console.WriteLine("The person with ID number " + getAllRented.CustomerId + " rented car number " + getAllRented.CarId + " between the following dates:" + getAllRented.RentDate + " - " + getAllRented.ReturnDate);
+                    Console.WriteLine("The person with ID number " + getAllRented.CustomerId + " rented car number " + getAllRented.CarId
+                        + " between the following dates:" + getAllRented.RentDate + " - " + getAllRented.ReturnDate);
                 }
             }
             else
