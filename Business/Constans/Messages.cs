@@ -12,5 +12,9 @@ namespace Business.Constans
         public static string CarAdded = "Car added successfully.";
         public static string BrandNameInvalid = "Brand name must be longer than 2 characters.";
         public static string BrandAdded = "Brand added successfully.";
+
+        public static string RentalIdInvalid = "Rental car not found.";
+        public static string CantBeRental = "This car is already rented.";
+        public static string RentalAddad = "Rental added successfully.";
     }
 }

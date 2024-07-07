@@ -1,6 +1,7 @@
 ﻿using System;
 using Azure.Core;
 using Business.Concrete;
+using Business.Constans;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -13,7 +14,12 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            AddRentalTest();
 
+            //AddCustomerTest();
+
+            //DeleteUserTest();
+            //AddUserTest();
 
             //GetAllCarDetailsTest();
 
@@ -36,6 +42,94 @@ namespace ConsoleUI
             //GetAllCarTest();
             //GetAllBrandTest();
             //GetAllColorTest();
+        }
+
+        private static void AddRentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var result = rentalManager.GetAll();
+
+            if (result.Success == true)
+            {
+                Rental addRental = new Rental() { CustomerId = 1 , CarId = 9, RentDate = DateTime.Now, ReturnDate = DateTime.Now.AddDays(15) }; 
+                rentalManager.Delete(addRental);
+
+                foreach (var getAllRented in rentalManager.GetAll().Data)
+                {
+                    Console.WriteLine("The person with ID number " + getAllRented.CustomerId + " rented car number " + getAllRented.CarId + " between the following dates:" + getAllRented.RentDate + " - " + getAllRented.ReturnDate);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+        private static void AddCustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            var result = customerManager.GetAll();
+
+            if (result.Success == true)
+            {
+                Customer addCustomer = new Customer() { UserId =6, CompanyName= "Gionata LTD" };
+                customerManager.Add(addCustomer);
+
+                foreach (var getAllCustomer in customerManager.GetAll().Data)
+                {
+                    Console.WriteLine(getAllCustomer.CompanyName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+        private static void DeleteUserTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result = userManager.GetAll();
+
+            if (result.Success == true)
+            {
+                User delUser = new User() { Id = 1 };
+                userManager.Delete(delUser);
+
+                foreach (var getAllUser in userManager.GetAll().Data)
+                {
+                    Console.WriteLine(getAllUser.Email);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+        private static void AddUserTest()
+        {
+            //Tüm kişi ve mail adresleri örnek amaçlıdır, asla gerçeği yansıtmamaktadır.
+            //all names created with https://www.behindthename.com/random/
+
+
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result = userManager.GetAll();
+
+            if (result.Success == true)
+            {
+                User addUser = new User() { FirstName = "Gwawl", LastName = "Romulus", Email = "GwawlRomulus@Example.com", Password = "******" };
+                userManager.Add(addUser);
+
+                foreach (var getAllUser in userManager.GetAll().Data)
+                {
+                    Console.WriteLine(getAllUser.Email);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
 
         private static void GetAllCarDetailsTest()

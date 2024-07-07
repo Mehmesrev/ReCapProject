@@ -9,7 +9,6 @@ using Business.Abstract;
 using Business.Constans;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs;
 

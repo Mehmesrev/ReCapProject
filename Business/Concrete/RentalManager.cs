@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Business.Constans;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -22,13 +24,20 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
+            
+            var isCarAvalible = _rentalDal.GetAll(r => r.CarId == rental.CarId).FirstOrDefault(r => r.ReturnDate == null);
+            if (isCarAvalible != null)
+            {
+                return new ErrorResult(Messages.CantBeRental);
+            }
+
             _rentalDal.Add(rental);
-            return new SuccessResult();
+            return new SuccessResult(Messages.RentalAddad);
         }
 
         public IResult Delete(Rental rental)
         {
-            _rentalDal.Add(rental);
+            _rentalDal.Delete(rental);
             return new SuccessResult();
         }
 
@@ -44,7 +53,7 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental)
         {
-            _rentalDal.Add(rental);
+            _rentalDal.Update(rental);
             return new SuccessResult();
         }
     }
