@@ -51,7 +51,7 @@ namespace ConsoleUI
 
             if (result.Success == true)
             {
-                Rental addRental = new Rental() { CustomerId = 1 , CarId = 9, RentDate = DateTime.Now, ReturnDate = DateTime.Now.AddDays(15) }; 
+                Rental addRental = new Rental() { CustomerId = 2 , CarId = 10, RentDate = DateTime.Now.AddDays(-10), ReturnDate = DateTime.Now.AddDays(-5) }; 
                 rentalManager.Add(addRental);
 
                 foreach (var getAllRented in rentalManager.GetAll().Data)

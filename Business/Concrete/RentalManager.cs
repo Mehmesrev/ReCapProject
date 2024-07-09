@@ -24,15 +24,17 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            
-            var isCarAvalible = _rentalDal.GetAll(r => r.CarId  == rental.CarId).FirstOrDefault(r => r.ReturnDate == null);
-            if (isCarAvalible != null)
+            //var existingRental = _rentalDal.GetAll(r => r.CarId == rental.CarId).FirstOrDefault(r => r.ReturnDate == null);
+            //if (existingRental != null) { }
+
+            var existingRental = _rentalDal.GetAll(r => r.CarId == rental.CarId && r.ReturnDate == null).Any();
+            if (existingRental)
             {
-                return new ErrorResult(Messages.CantBeRental);
+                return new ErrorResult("The car is already rented.");
             }
 
             _rentalDal.Add(rental);
-            return new SuccessResult(Messages.RentalAddad);
+            return new SuccessResult("Rental added successfully.");
         }
 
         public IResult Delete(Rental rental)
